@@ -1,5 +1,7 @@
 package com.luv2code.aopdemo;
 
+import java.util.List;
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.luv2code.aopdemo.dao.AccountDAO;
@@ -13,25 +15,14 @@ public class AfterReturningDemoApp {
 				new AnnotationConfigApplicationContext(DemoConfig.class);
 		
 		AccountDAO theAccountDAO = context.getBean("accountDAO", AccountDAO.class);
+
+		List<Account> theAccounts = theAccountDAO.findAccount();
 		
-		MembershipDAO theMembershipDAO = context.getBean("membershipDAO", MembershipDAO.class);
+		System.out.println("*******");
 		
+		System.out.println(theAccounts.toString());
 		
-		Account myAccount = new Account();
-		myAccount.setName("Madhu");
-		myAccount.setLevel("Platinum");
-		
-		theAccountDAO.addAccount(myAccount, true);
-		theAccountDAO.doWork();
-		
-		theAccountDAO.setName("FooBar");
-		theAccountDAO.setServiceCode("silver");
-		
-		String name = theAccountDAO.getName();
-		String code = theAccountDAO.getServiceCode();
-		
-		theMembershipDAO.addSillyMember();
-		theMembershipDAO.goToSleep();
+		System.out.println("*******");
 		
 		context.close();
 	}
