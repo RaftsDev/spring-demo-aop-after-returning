@@ -25,8 +25,22 @@ public class MyDemoLoggingAspect {
 		String method = theJoinPoint.getSignature().toShortString();
 		System.out.println("\n=====>>> Executing @AfterReturning on method: " + method);
 		System.out.println("\n=====>>> Result is: " + result);
+		
+		ConvertNameToUpperCase(result);
+		System.out.println("\n=====>>> Result is: " + result);
 	}
 	
+	private void ConvertNameToUpperCase(List<Account> result) {
+		// TODO Auto-generated method stub
+		for(Account tmpAccount : result) {
+			String theUpperName = tmpAccount.getName().toUpperCase();
+			
+			tmpAccount.setName(theUpperName);
+		}
+	}
+	
+	
+
 	@Before("com.luv2code.aopdemo.aspect.LuvAopExpressions.forDaoPackageNoGetterSetter()")
 	public void beforeAddAccountAdvice(JoinPoint theJoinPoint) {
 		System.out.println("\n *****  @Before... Executing advice on addAccount()...");
